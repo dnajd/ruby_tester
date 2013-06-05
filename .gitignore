@@ -1,0 +1,18 @@
+
+# OS-specific
+.DS_Store
+
+# Rubinius
+*.rbc		
+
+# IDE junk
+.idea/*
+*.iml
+
+# rake artifacts
+/spec/logs
+/spec/reports
+/chromedriver.log
+
+/.bundle
+/vendor

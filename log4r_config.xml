@@ -1,0 +1,46 @@
+<!--
+Log Configuration
+-->
+<log4r_config>
+ 
+  <pre_config>
+    <custom_levels>DEBUG, INFO, WARN, ERROR, FATAL</custom_levels>
+    <global level="ALL"/>
+  </pre_config>
+ 
+    <!-- Outputters -->
+    <outputter name="console_out" type="StdoutOutputter" level="DEBUG" >
+        <formatter type="Log4r::PatternFormatter">
+            <pattern>%d|level=%l|%m</pattern>
+            <date_method>strftime("%Y-%m-%d %H:%M:%S.%L")</date_method>
+        </formatter>
+    </outputter>
+ 
+    <outputter name="file_out" type="FileOutputter" level="INFO">
+        <filename>spec/logs/file.log</filename>
+        <formatter type="Log4r::PatternFormatter">
+            <pattern>%d|level=%l|%m</pattern>
+            <date_method>strftime("%Y-%m-%d %H:%M:%S.%L")</date_method>
+        </formatter>
+    </outputter>
+
+    <outputter name="splunk_out" type="UDPOutputter" level="INFO">
+        <hostname>logs4.splunkstorm.com</hostname>
+        <port>1234</port>
+        <formatter type="Log4r::PatternFormatter">
+            <pattern>%d|level=%l|%m</pattern>
+            <date_method>strftime("%Y-%m-%d %H:%M:%S.%L")</date_method>
+        </formatter>
+    </outputter>
+
+    <!-- Loggers -->
+    <logger name="FullLogger" additive="true" trace="true">
+        <outputter>console_out</outputter>
+        <outputter>file_out</outputter>
+        <!--<outputter>splunk_out</outputter>-->
+    </logger>
+    <logger name="ConsoleOnlyLogger" additive="true" trace="true">
+        <outputter>console_out</outputter>
+    </logger>
+ 
+</log4r_config>
