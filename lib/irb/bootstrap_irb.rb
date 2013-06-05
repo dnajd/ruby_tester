@@ -1,3 +1,4 @@
+require "rubygems"
 require "selenium-webdriver"
 require 'require_all'
 require "rspec"

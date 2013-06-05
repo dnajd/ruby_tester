@@ -3,6 +3,9 @@
 #
 # Rspec Matchers: http://rspec.rubyforge.org/rspec/1.1.9/classes/Spec/Matchers.html
 # Rest client: https://github.com/rest-client/rest-client
+# Debugging Rest Data:
+#    - save to file: File.open("spec/logs/inspect.json","w") {|f| f.write(JSON.pretty_generate(json_obj))}
+#    - puts to console: puts JSON.pretty_generate(json_obj)
 ################################################
 
 require "rubygems"
