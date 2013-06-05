@@ -2,7 +2,7 @@
 # RSpec with rest-client
 #
 # Rspec Matchers: http://rspec.rubyforge.org/rspec/1.1.9/classes/Spec/Matchers.html
-# Rest client: https://github.com/archiloque/rest-client
+# Rest client: https://github.com/rest-client/rest-client
 ################################################
 
 require "rubygems"
