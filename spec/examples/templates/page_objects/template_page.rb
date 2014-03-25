@@ -9,16 +9,29 @@ class TemplatePage
   end
 
 =begin
-  def fill_out_step1_required_fields(args={})
-    attribute = args[:attribute1] || 'default text'
+  def fill_out_step1_required_fields(args=[])
 
-    send_attribute attribute
-  end
+    items = [
+        { field_name: 'SomeField', value: '123 Test', index: 0 },
+        { field_name: 'AnotherField', value: '456 Test', index: 0 }
+    ]
 
-  def fill_out_step1_optional_fields(args={})
-    attribute = args[:attribute1] || 'default text'
+    args.each do |arg|
+      if arg[:index].nil?
+        index = 0
+      else
+        index = arg[:index]
+      end
 
-    send_attribute attribute
+      # Delete from items array if passed in combo of field_name and index is found
+      items.delete_if { |item| item[:field_name] == arg[:field_name] && item[:index] == index }
+      # Add passed in values back into the items array
+      items.push field_name: arg[:field_name], value: arg[:value], index: index
+
+    end
+
+    @form_helper.set_fields_by_label items
+
   end
 =end
 
