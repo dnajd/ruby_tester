@@ -7,3 +7,5 @@ require "rest_client"
 require "json"
 dir = File.dirname(__FILE__)
 require_all "#{dir}/../../**/page_objects/**/*.rb"
+#require "#{dir}/../../spec/web_helper.rb"
+require_all "#{dir}/../../spec/helpers/*.rb"

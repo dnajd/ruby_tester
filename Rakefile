@@ -40,3 +40,44 @@ task :examples => [:setup, :rspec_selenium_page_obj, :rspec_selenium, :rspec_res
 task :default do
 	exec("irb -r ./lib/irb/bootstrap_irb.rb")
 end
+
+=begin Examples
+task :api => [:rspec_api]
+task :calendar => [:rspec_calendar]
+
+# Setup tasks that should be called in top level
+task :api_setup do
+  FileUtils.rm_rf('./spec/reports/rspec_api')
+  FileUtils.rm_f('./spec/logs/API_Log.txt')
+
+  Dir.mkdir("spec/reports") unless File.directory? "spec/reports"
+  Dir.mkdir("spec/logs") unless File.directory? "spec/logs"
+
+  ENV['CI_REPORTS'] = "./spec/reports/rspec_api"
+  puts '*** CI Reports are here: ' + ENV['CI_REPORTS'] + "\n"
+
+  ENV['LOG_NAME'] = './spec/logs/API_Log.txt'
+end
+
+task :calendar_setup do
+  FileUtils.rm_rf('./spec/reports/rspec_calendar')
+  #FileUtils.rm_rf('spec/logs')
+
+  Dir.mkdir("spec/reports") unless File.directory? "spec/reports"
+  #Dir.mkdir("spec/logs") unless File.directory? "spec/logs"
+
+  ENV['CI_REPORTS'] = "./spec/reports/rspec_calendar"
+  puts '*** CI Reports are here: ' + ENV['CI_REPORTS'] + "\n"
+end
+
+# Low level individual tasks that top level calls
+# API
+RSpec::Core::RakeTask.new(:rspec_api => ["ci:setup:rspec", :api_setup]) do |t|
+  t.pattern = 'spec/api/*.rb'
+end
+
+# Calendar
+RSpec::Core::RakeTask.new(:rspec_calendar => ["ci:setup:rspec", :calendar_setup]) do |t|
+  t.pattern = 'spec/calendar/*.rb'
+end
+=end

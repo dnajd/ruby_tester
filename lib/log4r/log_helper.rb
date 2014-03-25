@@ -2,7 +2,7 @@ require 'log4r'
 include Log4r
 require 'log4r/configurator'
 require 'log4r/outputter/udpoutputter'
- 
+
 ####################################
 # Class: Log Helper
 # manual: http://log4r.rubyforge.org/manual.html
@@ -11,25 +11,25 @@ require 'log4r/outputter/udpoutputter'
 ####################################
 class LogHelper
 
-	def initialize()
-   	end
+  def initialize()
+  end
 
-	def get_logger()
+  def get_logger()
 
-		# make directory
-		Dir.mkdir("spec/logs") unless File.directory? "spec/logs"
+    # make directory
+    Dir.mkdir("spec/logs") unless File.directory? "spec/logs"
 
-		# get logger
-		return xml_configed_logger("FullLogger")
-	end
+    # get logger
+    return xml_configed_logger("FullLogger")
+  end
 
-	def xml_configed_logger(logger_name)
+  def xml_configed_logger(logger_name)
 
-		# configure logging
-		Configurator.load_xml_file('log4r_config.xml')
-		logger = Logger[logger_name]
-	
-		return logger
-	end
+    # configure logging
+    Configurator.load_xml_file('log4r_config.xml')
+    logger = Logger[logger_name]
+
+    return logger
+  end
 
 end
