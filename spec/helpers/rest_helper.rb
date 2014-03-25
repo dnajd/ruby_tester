@@ -6,7 +6,7 @@ class RestHelper
       domain = ENV['aqappapi_domain']
     else
       #domain = 'http://badri:SecretSauce@services.mbayaq.org/aqapp-api/v1'
-      domain = 'http://badri:SecretSauce@staging.mbayaq.org/aqapp-api/v1'
+      domain = 'http://user:password@staging.mbayaq.org/aqapp-api/v1'
     end
 
     return domain
