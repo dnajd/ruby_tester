@@ -4,48 +4,50 @@ require "selenium-webdriver"
 require_relative "../../lib/log4r/log_helper"
 require_relative "../../lib/selenium/selenium_helper"
 
-describe "search_google_images" do
+class selenium_screen_shot_test < MiniTest::Test
  
-  # selenium web driver
-  before(:all) do
-    @driver = Selenium::WebDriver.for :firefox
-    @driver.manage.timeouts.implicit_wait = 3 # seconds
+  def setup
     @logger = LogHelper.new.get_logger
   end
-  
  
-  it "should grab screenshot" do
+  def test_screenshot_mickey
     
-    # find mickey
+    # driver
+    @driver = Selenium::WebDriver.for :firefox
+    @driver.manage.timeouts.implicit_wait = 3 # seconds
     @driver.navigate.to "http://images.google.com"
+
+    # search for mickey
     element = @driver.find_element(:name, 'q')
     element.send_keys "mickey mouse"
     element.send_keys [:return]
 
     # screen shot
-    @driver.save_screenshot("./spec/reports/it_worked.png")
+    @driver.save_screenshot("./test/reports/it_worked.png")
 
+    # close driver
+    @driver.quit
   end
 
-  it "should grab screenshot on failure" do
+  def test_screenshot_on_error
     
-    # load google
+    # driver
+    @driver = Selenium::WebDriver.for :firefox
+    @driver.manage.timeouts.implicit_wait = 3 # seconds
     @driver.navigate.to "http://images.google.com"
+
+    # search google
     element = @driver.find_element(:name, 'q')
     element.send_keys "error"
     element.send_keys [:return]
 
-
+    # error on purpose
     SeleniumHelper.screen_grab_error(@driver) do
-
-      # error on purpose
-      nil.should eq(true)
-    
+      assert_equal true, false
     end
-  end
 
-  # ensure that the browser is shutdown 
-  after(:all) do
+    # close driver
     @driver.quit
   end
+
 end

@@ -1,43 +1,37 @@
 ################################################
-# RSpec with rest-client
-#
-# Rspec Matchers: http://rspec.rubyforge.org/rspec/1.1.9/classes/Spec/Matchers.html
 # Rest client: https://github.com/rest-client/rest-client
 # Debugging Rest Data:
-#    - save to file: File.open("spec/logs/inspect.json","w") {|f| f.write(JSON.pretty_generate(json_obj))}
+#    - save to file: File.open("test/logs/inspect.json","w") {|f| f.write(JSON.pretty_generate(json_obj))}
 #    - puts to console: puts JSON.pretty_generate(json_obj)
 ################################################
 
-require "rubygems"
-require "rspec"
 require "rest_client"
+require 'minitest/autorun'
 require "json"
 require_relative "../../lib/log4r/log_helper"
 
-describe "weather" do
- 
-  # selenium web driver
-  before(:all) do
+class RestClientTest < MiniTest::Test
+
+  def setup
     @logger = LogHelper.new.get_logger
   end
-  
-  it "should get weather" do
+
+  def test_get_weather
+
+    @logger.info "test"
 
     # rest uri
     uri = 'http://api.openweathermap.org/data/2.5/weather?q=Santa%20Rosa,CA'
     
     # try api call
     response = RestClient.get uri, {:accept => :json}
-    response.code.should eql(200)
+    assert_equal 200, response.code
     
     # json obj
     json_obj = JSON.parse(response)
-    json_obj["name"].should eql('Santa Rosa')
+    assert_equal 'Santa Rosa', json_obj["name"]
 
   end
- 
-  # ensure that the browser is shutdown 
-  after(:all) do
- 
-  end
+
+  
 end
