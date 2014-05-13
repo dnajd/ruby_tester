@@ -1,8 +1,25 @@
 # Rakefile tutorial: http://jasonseifer.com/2010/04/06/rake-tutorial
 require 'rake'
+require 'irb'
+
+###############################
+# minitest
+require 'rake/testtask'
+
+desc 'Unit tests.'
+Rake::TestTask.new(:test) do |t|
+  t.libs << 'lib'
+  t.libs << 'test'
+  t.pattern = 'test/**/*_test.rb'
+  t.verbose = true
+  t.warning = false
+end
+
+
+###############################
+# rspec
 require 'rspec/core/rake_task'
 require 'ci/reporter/rake/rspec' # From: https://github.com/nicksieger/ci_reporter
-require 'irb'
 
 # SETUP & CLEANUP
 task :setup do

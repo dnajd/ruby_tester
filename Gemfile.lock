@@ -13,6 +13,7 @@ GEM
     load_runner (1.0.0)
     log4r (1.1.10)
     mime-types (1.23)
+    minitest (5.3.2)
     multi_json (1.7.3)
     rake (10.0.4)
     require_all (1.2.1)
@@ -43,6 +44,7 @@ DEPENDENCIES
   httpclient
   load_runner (~> 1.0.0)
   log4r
+  minitest (= 5.3.2)
   rake (~> 10.0.1)
   require_all
   rest-client (>= 1.6)
