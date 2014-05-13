@@ -7,12 +7,12 @@ require_relative "../lib/log4r/log_helper"
 class RestClientTest < MiniTest::Test
 
   def setup
-  
+    @logger = LogHelper.new.get_logger
   end
 
   def test_get_weather
 
-    logger = LogHelper.new.get_logger
+    @logger.info "test"
 
     # rest uri
     uri = 'http://api.openweathermap.org/data/2.5/weather?q=Santa%20Rosa,CA'
