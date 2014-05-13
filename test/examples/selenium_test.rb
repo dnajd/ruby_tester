@@ -8,42 +8,38 @@ require "rubygems"
 require 'minitest/autorun'
 require "selenium-webdriver"
 require_relative "../../lib/log4r/log_helper"
- 
 
-class selenium_test < MiniTest::Test
+class SeleniumTest < Minitest::Unit::TestCase
  
   def setup
     @logger = LogHelper.new.get_logger
+    @driver = Selenium::WebDriver.for :firefox
+    @driver.manage.timeouts.implicit_wait = 3 # seconds
   end
   
+  def teardown
+    @driver.quit
+  end
+
   def test_load_google
     
     # navigate
-    @driver = Selenium::WebDriver.for :firefox
-    @driver.manage.timeouts.implicit_wait = 3 # seconds
     @driver.navigate.to "http://google.com"
     
     # check page title
-    @driver.title.should match(/^Google/)
+    assert_equal 'Google', @driver.title
 
-    # close driver
-    @driver.quit
     
   end
  
   def test_search_google
 
     # navigate   
-    @driver = Selenium::WebDriver.for :firefox
-    @driver.manage.timeouts.implicit_wait = 3 # seconds 
     @driver.navigate.to "http://google.com"
 
     # search field
     element = @driver.find_element(:name, 'q')
     element.send_keys "Santa Rosa"
-
-    # close driver
-    @driver.quit
     
   end
 

@@ -3,6 +3,7 @@ require 'rake'
 require 'irb'
 require 'fileutils'
 require 'rake/testtask'
+require 'ci/reporter/rake/minitest' # From: https://github.com/nicksieger/ci_reporter
 
 desc "setup for ci reporter"
 task :setup do
@@ -23,7 +24,7 @@ end
 
 
 desc 'Unit tests.'
-Rake::TestTask.new(:test) do |t|
+Rake::TestTask.new(:test => ['ci:setup:minitest', 'setup']) do |t|
   t.libs << 'lib'
   t.libs << 'test'
   t.pattern = 'test/**/*_test.rb'

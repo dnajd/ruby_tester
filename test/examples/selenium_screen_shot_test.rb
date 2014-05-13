@@ -1,20 +1,23 @@
 require "rubygems"
-require "rspec"
+require 'minitest/autorun'
 require "selenium-webdriver"
 require_relative "../../lib/log4r/log_helper"
 require_relative "../../lib/selenium/selenium_helper"
 
-class selenium_screen_shot_test < MiniTest::Test
+class SeleniumScreenShotTest < Minitest::Unit::TestCase
  
   def setup
     @logger = LogHelper.new.get_logger
-  end
- 
-  def test_screenshot_mickey
-    
-    # driver
     @driver = Selenium::WebDriver.for :firefox
     @driver.manage.timeouts.implicit_wait = 3 # seconds
+  end
+
+  def teardown
+    @driver.quit
+  end
+
+ 
+  def test_screenshot_mickey
     @driver.navigate.to "http://images.google.com"
 
     # search for mickey
@@ -24,16 +27,9 @@ class selenium_screen_shot_test < MiniTest::Test
 
     # screen shot
     @driver.save_screenshot("./test/reports/it_worked.png")
-
-    # close driver
-    @driver.quit
   end
 
   def test_screenshot_on_error
-    
-    # driver
-    @driver = Selenium::WebDriver.for :firefox
-    @driver.manage.timeouts.implicit_wait = 3 # seconds
     @driver.navigate.to "http://images.google.com"
 
     # search google
@@ -45,9 +41,6 @@ class selenium_screen_shot_test < MiniTest::Test
     SeleniumHelper.screen_grab_error(@driver) do
       assert_equal true, false
     end
-
-    # close driver
-    @driver.quit
   end
 
 end

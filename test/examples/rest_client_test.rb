@@ -10,7 +10,7 @@ require 'minitest/autorun'
 require "json"
 require_relative "../../lib/log4r/log_helper"
 
-class RestClientTest < MiniTest::Test
+class RestClientTest < Minitest::Unit::TestCase
 
   def setup
     @logger = LogHelper.new.get_logger
