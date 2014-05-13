@@ -1,45 +1,52 @@
 class SeleniumHelper
 
-	# screen grab errors
-	def self.screen_grab_error(driver)
-	    begin
-	      	yield
-	    rescue => error
-			timestamp = Time.now.to_i
-	      	driver.save_screenshot("./spec/reports/error_#{timestamp}.png")
-	      	raise
-	    end 
-	end
+  # Grab screenshots on error. If filename is not provided, timestamp is used.
+  # @param [Selenium::WebDriver] driver
+  def self.screen_grab_error(driver, filename = nil)
 
-	# wait for element to go away
-	def self.wait_element_gone(seconds)
-		wait = Selenium::WebDriver::Wait.new(:timeout => seconds) # seconds 
-		wait.until {
-	      begin
-	        yield
-	        false
-	      rescue Selenium::WebDriver::Error::NoSuchElementError
-	        true
-	      end
-  		}
-	end
+    begin
+      yield
 
+    rescue => error
+      unless filename
+        filename = timestamp
+      end
 
-	# wait for element to go away
-	def self.wait_for(seconds)
-		wait = Selenium::WebDriver::Wait.new(:timeout => seconds) # seconds 
-		wait.until {
-	       yield
-  		}
-	end
+      driver.save_screenshot("#{filename}.png")
+      driver.save_screenshot("./spec/reports/error_#{timestamp}.png")
 
-	def self.exists()
+      raise
+    end
+  end
+
+  # wait for element to go away
+  def self.wait_element_gone(seconds)
+    wait = Selenium::WebDriver::Wait.new(:timeout => seconds) # seconds
+    wait.until {
       begin
         yield
-        true
-      rescue Selenium::WebDriver::Error::NoSuchElementError
         false
+      rescue Selenium::WebDriver::Error::NoSuchElementError
+        true
       end
-	end
+    }
+  end
+
+  # wait for element to go away
+  def self.wait_for(seconds)
+    wait = Selenium::WebDriver::Wait.new(:timeout => seconds) # seconds
+    wait.until {
+      yield
+    }
+  end
+
+  def self.exists()
+    begin
+      yield
+      true
+    rescue Selenium::WebDriver::Error::NoSuchElementError
+      false
+    end
+  end
 
 end
