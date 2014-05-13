@@ -8,7 +8,6 @@ gem "rest-client",  ">=1.6"
 gem "minitest", "5.3.2"
 
 gem "selenium-webdriver",  ">=2.25"
-gem "rspec",  ">=2.11"
 gem "ci_reporter",  ">=1.7"
 
 gem "httpclient"

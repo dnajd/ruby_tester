@@ -1,6 +1,7 @@
 # Rakefile tutorial: http://jasonseifer.com/2010/04/06/rake-tutorial
 require 'rake'
 require 'irb'
+require 'fileutils'
 
 ###############################
 # minitest
@@ -25,16 +26,17 @@ require 'ci/reporter/rake/rspec' # From: https://github.com/nicksieger/ci_report
 task :setup do
 
   # ci reports
-  ci_reports_file = ENV['CI_REPORTS'] = "./spec/reports"
-  puts "ci reports are here:" + ci_reports_file
+  ci_reports_file = ENV['CI_REPORTS'] = "./test/reports"
+  puts "Ci reports are here:" + ci_reports_file
 
   # folders
-  Dir.mkdir("spec/logs") unless File.directory? "spec/logs"
-  Dir.mkdir("spec/reports") unless File.directory? "spec/reports"
+  Dir.mkdir("test/logs") unless File.directory? "test/logs"
+  Dir.mkdir("test/reports") unless File.directory? "test/reports"
 
 end
 task :clean do
-  exec("rm -r -f ./spec/reports|rm -r -f ./spec/logs")
+  Dir.mkdir("test/reports") unless File.directory? "test/reports"
+  Dir.mkdir("test/logs") unless File.directory? "test/logs"
 end
 
 # EXAMPLES
