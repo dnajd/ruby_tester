@@ -17,7 +17,7 @@ class LogHelper
 	def get_logger()
 
 		# make directory
-		Dir.mkdir("spec/logs") unless File.directory? "spec/logs"
+		Dir.mkdir("test/logs") unless File.directory? "test/logs"
 
 		# get logger
 		return xml_configed_logger("FullLogger")

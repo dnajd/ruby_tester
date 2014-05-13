@@ -5,7 +5,7 @@ gem "rake", "~> 10.0.1"
 gem "log4r"
 gem "rest-client",  ">=1.6"
 
-gem "minitest", "5.3.2"
+gem 'minitest', '< 5.0.0'
 
 gem "selenium-webdriver",  ">=2.25"
 gem "ci_reporter",  ">=1.7"

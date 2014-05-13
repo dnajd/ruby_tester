@@ -17,7 +17,7 @@ Log Configuration
     </outputter>
  
     <outputter name="file_out" type="FileOutputter" level="INFO">
-        <filename>spec/logs/file.log</filename>
+        <filename>test/logs/file.log</filename>
         <formatter type="Log4r::PatternFormatter">
             <pattern>%d|level=%l|%m</pattern>
             <date_method>strftime("%Y-%m-%d %H:%M:%S.%L")</date_method>

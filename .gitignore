@@ -10,8 +10,8 @@
 *.iml
 
 # rake artifacts
-/spec/logs
-/spec/reports
+/test/logs
+/test/reports
 /chromedriver.log
 
 /.bundle
