@@ -4,7 +4,7 @@ Test web applications or rest services
 
 Getting Started
 ================
-The spec folder has examples of:
+The test folder has examples of:
 
 * testing a rest service
 * testing a webpage with selenium
@@ -14,18 +14,7 @@ Running the Tests
 =================
 Run all tests
 
-	bundle execute rake examples
-
-Run specific tests
-
-	# rest client
-	bundle execute rake rspec_rest_client
-
-	# web page
-	bundle execute rake rspec_selenium
-
-	# web page w/ page object pattern
-	bundle execute rake rspec_selenium_page_obj
+	bundle execute rake test
 
 Interactive Selenium
 ---------------------
