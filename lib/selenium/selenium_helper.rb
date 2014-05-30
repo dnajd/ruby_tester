@@ -13,7 +13,7 @@ class SeleniumHelper
       end
 
       driver.save_screenshot("#{filename}.png")
-      driver.save_screenshot("./spec/reports/error_#{timestamp}.png")
+      driver.save_screenshot("./test/reports/error_#{timestamp}.png")
 
       raise
     end
